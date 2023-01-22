@@ -6,4 +6,20 @@
  */
 export const pick = (obj, ...fields) => {
 
+  const arrayKeyAndValue = Object.entries(obj); //Object.entries(obj) – возвращает массив пар [ключ, значение]
+
+  const object = {};
+
+  arrayKeyAndValue.forEach(value => {
+
+    fields.forEach(element => {
+
+      if (element === value[0]) {
+        object[value[0]] = value[1];
+      }
+    });
+  });
+  return object;
 };
+
+
