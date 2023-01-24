@@ -6,4 +6,26 @@
  */
 export const omit = (obj, ...fields) => {
 
+  const arrayKeyAndValue = Object.entries(obj); //Object.entries(obj) – возвращает массив пар [ключ, значение]
+
+  const object = {};
+
+  arrayKeyAndValue.forEach(value => {
+
+    if (!fields.includes(value[0])) {
+      object[value[0]] = value[1];
+    }
+
+    // fields.forEach(element => {
+
+    //   if (element === value[0]) {
+    //     object[value[0]] = value[1];
+    //   }
+    // });
+  });
+
+
+
+
+  return object;
 };
