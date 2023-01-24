@@ -15,17 +15,6 @@ export const omit = (obj, ...fields) => {
     if (!fields.includes(value[0])) {
       object[value[0]] = value[1];
     }
-
-    // fields.forEach(element => {
-
-    //   if (element === value[0]) {
-    //     object[value[0]] = value[1];
-    //   }
-    // });
   });
-
-
-
-
   return object;
 };
