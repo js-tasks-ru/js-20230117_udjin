@@ -8,11 +8,7 @@
  * @returns {string[]}
  */
 function comparator(a, b) {
-  return a.localeCompare(b, 'ru', { sensitivity: 'variant', caseFirst: 'upper' });
-}
-
-function comparatorR(a, b) {
-  return b.localeCompare(a, 'ru', { sensitivity: 'variant', caseFirst: 'upper' });
+  return a.localeCompare(b, ['ru', 'en'], { sensitivity: 'variant', caseFirst: 'upper' });
 }
 
 export function sortStrings(arr, param = 'asc') {
@@ -20,8 +16,9 @@ export function sortStrings(arr, param = 'asc') {
   const nArr = [...arr];
 
   if (param === 'asc') {
-    return nArr.sort(comparator);
+    return nArr.sort((a, b) => comparator(a, b));
   }
 
-  return nArr.sort(comparatorR);
+  return nArr.sort((a, b) => comparator(b, a));
 }
+
