@@ -12,12 +12,9 @@ export const pick = (obj, ...fields) => {
 
   arrayKeyAndValue.forEach(value => {
 
-    fields.forEach(element => {
-
-      if (element === value[0]) {
-        object[value[0]] = value[1];
-      }
-    });
+    if (fields.includes(value[0])) {
+      object[value[0]] = value[1];
+    }
   });
   return object;
 };

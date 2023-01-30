@@ -5,4 +5,21 @@
  */
 export function createGetter(path) {
 
+  const arrPath = path.split('.');
+
+  return function (obj) {
+    let result = obj;
+
+    for (const item of arrPath) {
+      if (result === undefined) {
+        break;
+      }
+
+      result = result[item];
+    }
+    return result;
+  };
 }
+
+
+
