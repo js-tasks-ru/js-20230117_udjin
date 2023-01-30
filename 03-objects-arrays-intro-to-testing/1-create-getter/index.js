@@ -8,16 +8,18 @@ export function createGetter(path) {
   const arrPath = path.split('.');
 
   return function (obj) {
-    let result;
+    let result = obj;
 
-    while (arrPath.length) {
-      result = obj[arrPath.shift()];
+    for (const item of arrPath) {
       if (result === undefined) {
-        return undefined;
+        break;
       }
-      obj = result;
+
+      result = result[item];
     }
     return result;
   };
 }
+
+
 

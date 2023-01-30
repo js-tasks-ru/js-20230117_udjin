@@ -5,10 +5,7 @@
  */
 export function uniq(arr) {
 
-  const set = new Set(arr);
-  const uniqArr = [];
-  set.forEach((item) => uniqArr.push(item));
+  return [...new Set(arr)];
 
-  return uniqArr;
 }
 
