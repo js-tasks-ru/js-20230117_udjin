@@ -18,46 +18,78 @@ export default class ColumnChart {
     this.render();
   }
 
+  get template() {
+    return `
+              <div class="dashboard__chart_${this._label}">
+                <div class="column-chart column-chart_loading" style="--chart-height: ${this.chartHeight}">
+                  <div class="column-chart__title">
+                    Total ${this._label}
+                    ${this._link}
+                  </div>
+                  <div class="column-chart__container">
+                    <div data-element="header" class="column-chart__header">${this._value}</div>
+                    <div data-element="body" class="column-chart__chart">
+
+                      ${this.getCharts()}
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              `;
+  }
+
   render() {
     const wrap = document.createElement('div');
 
-    const link = (this._link ? `<a href="/sales" class="column-chart__link">View all</a>` : '');
+    this._link = (this._link ? `<a href="${this._link}" class="column-chart__link">View all</a>` : '');
     const isData = Boolean(this._data.length);
-    wrap.innerHTML = isData ?
-      `
-                      <div class="dashboard__chart_${this._label}">
-                        <div class="column-chart" style="--chart-height: ${this.chartHeight}">
-                          <div class="column-chart__title">
-                            Total ${this._label}
-                            ${link}
-                          </div>
-                          <div class="column-chart__container">
-                            <div data-element="header" class="column-chart__header">${this._value}</div>
-                            <div data-element="body" class="column-chart__chart">
 
-                              ${this.getCharts()}
 
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      `
-      :
+    wrap.innerHTML = this.template;
+    this.element = wrap.firstElementChild;
 
-      `
-                      <div class="dashboard__chart_${this._label}">
-                        <div class="column-chart" style="--chart-height: ${this.chartHeight}">
-                          <div class="column-chart__title">
-                            Total ${this._label}
-                            ${link}
-                          </div>
-                          <div class="column-chart__container">
-                          <img src="charts-skeleton.svg"/>
-                          </div>
-                        </div>
-                      </div>
-                      `;
-    this.element = wrap;
+
+    if (isData) {
+      console.log(this.element);
+      this.element.firstElementChild.classList.remove("column-chart_loading");
+    }
+
+    // wrap.innerHTML = isData ?
+    //   `
+    //                   <div class="dashboard__chart_${this._label}">
+    //                     <div class="column-chart" style="--chart-height: ${this.chartHeight}">
+    //                       <div class="column-chart__title">
+    //                         Total ${this._label}
+    //                         ${link}
+    //                       </div>
+    //                       <div class="column-chart__container">
+    //                         <div data-element="header" class="column-chart__header">${this._value}</div>
+    //                         <div data-element="body" class="column-chart__chart">
+
+    //                           ${this.getCharts()}
+
+    //                         </div>
+    //                       </div>
+    //                     </div>
+    //                   </div>
+    //                   `
+    //   :
+
+    //   `
+    //                   <div class="dashboard__chart_${this._label}">
+    //                     <div class="column-chart" style="--chart-height: ${this.chartHeight}">
+    //                       <div class="column-chart__title">
+    //                         Total ${this._label}
+    //                         ${link}
+    //                       </div>
+    //                       <div class="column-chart__container">
+    //                       <img src="charts-skeleton.svg"/>
+    //                       </div>
+    //                     </div>
+    //                   </div>
+    //                   `;
+    // this.element = wrap;
   }
 
   getCharts() {
@@ -83,6 +115,10 @@ export default class ColumnChart {
   }
 
   update(data = []) {
+    if (!data.length) {
+      console.log(this.element);
+      this.element.firstElementChild.classList.add("column-chart_loading");
+    }
     this._data = data;
     this.render();
   }
@@ -99,10 +135,3 @@ export default class ColumnChart {
   }
 }
 
-
-// const ordersChart = new ColumnChart({
-//   data: ordersData,
-//   label: 'orders',
-//   value: 344,
-//   link: '#'
-// });
