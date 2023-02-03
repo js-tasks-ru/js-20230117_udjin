@@ -55,41 +55,7 @@ export default class ColumnChart {
       this.element.firstElementChild.classList.remove("column-chart_loading");
     }
 
-    // wrap.innerHTML = isData ?
-    //   `
-    //                   <div class="dashboard__chart_${this._label}">
-    //                     <div class="column-chart" style="--chart-height: ${this.chartHeight}">
-    //                       <div class="column-chart__title">
-    //                         Total ${this._label}
-    //                         ${link}
-    //                       </div>
-    //                       <div class="column-chart__container">
-    //                         <div data-element="header" class="column-chart__header">${this._value}</div>
-    //                         <div data-element="body" class="column-chart__chart">
-
-    //                           ${this.getCharts()}
-
-    //                         </div>
-    //                       </div>
-    //                     </div>
-    //                   </div>
-    //                   `
-    //   :
-
-    //   `
-    //                   <div class="dashboard__chart_${this._label}">
-    //                     <div class="column-chart" style="--chart-height: ${this.chartHeight}">
-    //                       <div class="column-chart__title">
-    //                         Total ${this._label}
-    //                         ${link}
-    //                       </div>
-    //                       <div class="column-chart__container">
-    //                       <img src="charts-skeleton.svg"/>
-    //                       </div>
-    //                     </div>
-    //                   </div>
-    //                   `;
-    // this.element = wrap;
+    this.element = wrap;
   }
 
   getCharts() {
