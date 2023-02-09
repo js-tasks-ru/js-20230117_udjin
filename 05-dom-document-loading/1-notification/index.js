@@ -15,7 +15,7 @@ export default class NotificationMessage {
     this.duration = duration;
     this.type = type;
     this.durationInSecond = (duration / 1000) + 's';
-
+    console.log(this.durationInSecond)
     this.render();
 
   }
@@ -24,7 +24,7 @@ export default class NotificationMessage {
     return `  <div class="notification ${this.type}" style="--value:${this.durationInSecond}">
                 <div class="timer"></div>
                 <div class="inner-wrapper">
-                  <div class="notification-header">success</div>
+                  <div class="notification-header">Notification</div>
                   <div class="notification-body">
                     ${this.message}
                   </div>
@@ -47,7 +47,7 @@ export default class NotificationMessage {
 
     parent.append(this.element);
 
-    this.timerId = setTimeout(() => { this.remove(); }, this.duration);
+    this.timerId = setTimeout(() => { this.destroy(); console.log(this) }, this.duration);
 
     NotificationMessage.activeNotification = this;
   }
