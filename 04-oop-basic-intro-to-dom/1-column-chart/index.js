@@ -1,5 +1,6 @@
 export default class ColumnChart {
 
+  subElement = {};
   chartHeight = 50;
 
   constructor({
@@ -51,11 +52,23 @@ export default class ColumnChart {
 
 
     if (isData) {
-      console.log(this.element);
       this.element.firstElementChild.classList.remove("column-chart_loading");
     }
 
-    this.element = wrap;
+    this.subElements = this.getSubElements();
+  }
+
+  getSubElements() {
+    const result = {};
+    const elements = this.element.querySelectorAll("[data-element]");
+
+    for (const subElement of elements) {
+      const name = subElement.dataset.element;
+
+      result[name] = subElement;
+    }
+
+    return result;
   }
 
   getCharts() {
@@ -82,11 +95,10 @@ export default class ColumnChart {
 
   update(data = []) {
     if (!data.length) {
-      console.log(this.element);
       this.element.firstElementChild.classList.add("column-chart_loading");
     }
     this._data = data;
-    this.render();
+    this.subElements.body.innerHTML = this.getCharts();
   }
 
   remove() {
@@ -98,6 +110,7 @@ export default class ColumnChart {
   destroy() {
     this.remove();
     this.element = {};
+    this.subElement = {};
   }
 }
 
